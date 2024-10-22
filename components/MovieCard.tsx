@@ -4,8 +4,9 @@ import { BiChevronDown } from 'react-icons/bi';
 import { useRouter } from 'next/router';
 import useInfoModal from '@/hooks/useInfoModal';
 
+
 interface MovieCardProps {
-  data: Record<string, any>;
+  data: Record<string, string>;
 }
 
 const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
