@@ -11,11 +11,11 @@ const Navbar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showAccountMenu, setShowAccountMenu] = useState(false);
   const [showBackground, setShowBackground] = useState(false);
-  const menuRef = useRef(null);
+  const menuRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const closeMenu = (e: React.ChangeEvent<HTMLInputElement>): void => {
-      if (!menuRef.current?.contains(e.target as HTMLDivElement)) {
+    const closeMenu = (e: MouseEvent): void => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
         setShowMobileMenu(false);
         setShowAccountMenu(false);
       }
@@ -25,7 +25,7 @@ const Navbar = () => {
     return () => {
       document.removeEventListener('mousedown', closeMenu);
     };
-  });
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
