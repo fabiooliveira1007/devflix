@@ -59,7 +59,7 @@ O projeto estará disponível em `http://localhost:3000`.
 
 | Tela de Login | Tela Principal |
 |---------------|----------------|
-| <img src="https://raw.githubusercontent.com/fabiooliveira1007/images/refs/heads/main/login-devflix.JPG?token=GHSAT0AAAAAACWLIDSPNIGYFG6MEIVNEFNQZZJFVUQ" width="400"/> | <img src="https://raw.githubusercontent.com/fabiooliveira1007/images/refs/heads/main/homepage-devflix.JPG?token=GHSAT0AAAAAACWLIDSPV243GALITDJY75GEZZJFVSQ" width="400"/> |
+| <img src="https://raw.githubusercontent.com/fabiooliveira1007/images/refs/heads/main/login-devflix.JPG" width="400"/> | <img src="https://raw.githubusercontent.com/fabiooliveira1007/images/refs/heads/main/homepage-devflix.JPG" width="400"/> |
 
 
 ---
