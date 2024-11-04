@@ -28,7 +28,7 @@ const Profiles = () => {
   return (
     <div className='flex items-center h-full justify-center'>
       <div className='flex flex-col'>
-        <h1 className='text-white text-center md:text-6xl text-3xl'>
+        <h1 className='text-slate-100 text-center md:text-6xl text-3xl'>
           Who is watching?
         </h1>
         <div className='flex items-center justify-center gap-8 mt-10'>
@@ -43,15 +43,15 @@ const Profiles = () => {
                   border-2 
                   border-transparent 
                   group-hover:cursor-pointer
-                  group-hover:border-white 
+                  group-hover:border-slate-100 
                   mx-auto
                 '
-                src='/images/default-blue.png'
+                src='/images/crazy-toad.gif'
                 width={170}
                 height={170}
-                alt='profile image'
+                alt='Crazy Toad gif'
               />
-              <div className='text-center mt-4 text-2xl text-gray-300 group-hover:text-white'>
+              <div className='text-center mt-4 text-2xl text-slate-300 group-hover:text-slate-100'>
                 {user?.name}
               </div>
             </div>

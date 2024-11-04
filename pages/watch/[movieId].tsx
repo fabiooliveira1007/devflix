@@ -8,7 +8,7 @@ const Watch = () => {
   const { data } = useMovie(movieId as string);
 
   return (
-    <div className='h-screen w-screen bg-black'>
+    <div className='h-screen w-screen bg-slate-950'>
       <nav
         className='
           fixed
@@ -19,16 +19,16 @@ const Watch = () => {
           flex-row
           items-center
           gap-8
-          bg-black
+          bg-slate-950
           bg-opacity-70
         '
       >
         <AiOutlineArrowLeft
           onClick={() => router.push('/')}
-          className='text-white cursor-pointer'
-          size={40}
+          className='text-slate-100 cursor-pointer'
+          size={30}
         />
-        <p className='text-white text-1xl md:text-3xl font-bold'>
+        <p className='text-slate-100 text-1xl md:text-2xl font-bold'>
           <span className='font-light'>Watching: </span>
           {data?.title}
         </p>

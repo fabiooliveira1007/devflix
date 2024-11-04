@@ -10,11 +10,11 @@ const MovieList: React.FC<MovieListProps> = ({ data, title }) => {
   if (isEmpty(data)) return null;
 
   return (
-    <div className='px-4 md:px-12 mt-4 space-y-8'>
+    <div className='px-4 sm:px-8 mt-4 space-y-8'>
       <div>
         <p
           className='
-            text-white 
+            text-slate-100
             text-md md:text-xl lg:text-2xl 
             font-semibold 
             mb-4
@@ -22,7 +22,7 @@ const MovieList: React.FC<MovieListProps> = ({ data, title }) => {
         >
           {title}
         </p>
-        <div className='grid grid-cols-4 gap-2'>
+        <div className={`grid gap-4 ${data.length > 1 ? 'grid-cols-[repeat(auto-fit,minmax(180px,1fr))]' : 'grid-cols-[repeat(auto-fill,minmax(200px,1fr))]'  }`}>
           {data.map(movie => (
             <MovieCard
               key={movie.id}

@@ -31,7 +31,7 @@ export default function Home() {
   const { isOpen, closeModal } = useInfoModal();
 
   return (
-    <>
+    <div className='max-w-7xl mx-auto'>
       <InfoModal
         visible={isOpen}
         onClose={closeModal}
@@ -48,6 +48,6 @@ export default function Home() {
           data={favorites}
         />
       </div>
-    </>
+    </div>
   );
 }

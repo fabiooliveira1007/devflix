@@ -57,11 +57,12 @@ const Auth = () => {
         bg-cover
       "
     >
-      <div className='bg-black w-full h-full lg:bg-opacity-50'>
+      <div className='bg-slate-950 w-full h-full lg:bg-opacity-50'>
         <nav className='px-12 py-5'>
           <Image
-            src='/images/logo.png'
-            alt='Netflix Logo'
+            className='sm:size-1/2 max-w-44'
+            src='/images/logo.svg'
+            alt='Devflix Logo'
             width={150}
             height={48}
           />
@@ -69,10 +70,10 @@ const Auth = () => {
         <div className='flex justify-center'>
           <div
             className='
-              bg-black 
+              bg-slate-950
               bg-opacity-70 
-              px-16 
-              py-16 
+              px-12 
+              py-12
               self-center 
               mt-2 
               w-full lg:w-2/5 
@@ -80,7 +81,7 @@ const Auth = () => {
               rounded-md
             '
           >
-            <h2 className='text-white text-4xl mb-8 font-semibold'>
+            <h2 className='text-slate-100 text-3xl mb-8'>
               {variant === 'login' ? 'Sign In' : 'Register'}
             </h2>
             <div className='flex flex-col gap-4'>
@@ -96,6 +97,7 @@ const Auth = () => {
                 />
               )}
               <Input
+              
                 label='Email'
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                   setEmail(event.target.value)
@@ -118,13 +120,13 @@ const Auth = () => {
               onClick={variant === 'login' ? login : register}
               type='button'
               className='
-                bg-red-600 
-                text-white 
+                bg-slate-600 
+                text-slate-100
                 py-3 
                 rounded-md 
                 w-full 
                 mt-10 
-                hover:bg-red-700 
+                hover:bg-slate-700 
                 transition
               '
             >
@@ -146,7 +148,7 @@ const Auth = () => {
                 className='
                   w-10 
                   h-10 
-                  bg-white 
+                  bg-slate-100
                   rounded-full 
                   flex 
                   items-center 
@@ -164,7 +166,7 @@ const Auth = () => {
                 className='
                   w-10 
                   h-10 
-                  bg-white 
+                  bg-slate-100
                   rounded-full 
                   flex 
                   items-center 
@@ -177,14 +179,14 @@ const Auth = () => {
                 <FaGithub size={30} />
               </div>
             </div>
-            <p className='text-neutral-500 mt-12 text-center'>
+            <p className='text-slate-500 mt-12 text-center'>
               {variant === 'login'
-                ? 'First time using Netflix'
+                ? 'First time using DEVFLIX?'
                 : 'Already have an account?'}
               <span
                 onClick={toggleVariant}
                 onKeyDown={toggleVariant}
-                className='text-white ml-1 hover:underline cursor-pointer'
+                className='text-slate-100 ml-1 hover:underline cursor-pointer block'
               >
                 {variant === 'login' ? 'Create an account' : 'Login'}
               </span>

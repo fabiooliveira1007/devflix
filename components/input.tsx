@@ -24,8 +24,8 @@ const Input: React.FC<InputProps> = ({ id, onChange, value, label, type }) => {
           pb-1 
           w-full 
           text-md 
-          text-white 
-          bg-neutral-700 
+          text-slate-100 
+          bg-slate-800 
           appearance-none 
           focus:outline-none 
           focus:ring-0 peer
@@ -37,7 +37,7 @@ const Input: React.FC<InputProps> = ({ id, onChange, value, label, type }) => {
         className='
           absolute 
           text-md 
-          text-zinc-400 
+          text-slate-400
           duration-150 
           transform 
           -translate-y-3 

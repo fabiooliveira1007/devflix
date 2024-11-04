@@ -13,19 +13,21 @@ const Billboard = () => {
   }, [openModal, data?.id]);
 
   return (
-    <div className='relative h-[60vw]'>
+    <div className='relative h-[70vw] sm:h-[60vw] max-h-[540px]'>
       <video
-        className='w-full h-[60vw] object-cover brightness-[60%]'
+        className='w-full h-[70vw] sm:h-[60vw] max-h-[540px] object-cover brightness-[60%]'
         loop
         muted
         autoPlay
         poster={data?.thumbnailUrl}
         src={data?.videoUrl}
       />
-      <div className='absolute top-[30%] ml-4 md:ml-16'>
+      <div className='absolute top-[40%] sm:top-[30%] ml-4 md:ml-16'>
         <p
           className='
-            text-white text-1xl md:text-5xl lg:text-6xl
+            text-slate-100 
+            text-2xl md:text-5xl lg:text-6xl
+            whitespace-nowrap
             h-full 
             w-[50%] 
             font-bold 
@@ -36,7 +38,7 @@ const Billboard = () => {
         </p>
         <p
           className='
-            text-white text-[8px] md:text-lg 
+            text-slate-100 text-[12px] md:text-lg 
             mt-3 md:mt-8 
             w-[90%] md:w-[50%] lg:w-[50%] 
             drop-shadow-xl
@@ -58,8 +60,8 @@ const Billboard = () => {
             type='button'
             onClick={handleOpenModal}
             className='
-              bg-white 
-              text-white 
+              bg-slate-100
+              text-slate-100
               bg-opacity-30 hover:bg-opacity-20
               rounded-md 
               py-1 md:py-2 

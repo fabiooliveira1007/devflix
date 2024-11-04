@@ -50,7 +50,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className='w-full fixed z-40'>
+    <nav className='w-full max-w-7xl fixed z-40'>
       <div
         className={` 
           px-4 md:px-16 
@@ -58,13 +58,13 @@ const Navbar = () => {
           flex-row 
           items-center 
           transition 
-          duration-500 ${showBackground ? 'bg-zinc-900 bg-opacity-90' : ''}
+          duration-500 ${showBackground ? 'bg-slate-950 bg-opacity-90' : ''}
         `}
       >
         <img
-          className='w-24 lg:w-36 mr-1'
-          src='/images/logo.png'
-          alt='netflix logo'
+          className='w-20 lg:w-36 mr-1'
+          src='/images/logo.svg'
+          alt='Devflix logo'
         />
         <div className=' flex-row ml-4 gap-6 hidden lg:flex'>
           <NavbarItem label='Home' />
@@ -89,19 +89,19 @@ const Navbar = () => {
             relative
           '
         >
-          <p className='text-white text-sm'>Browser</p>
+          <p className='text-slate-100 text-sm'>Browser</p>
           <BsChevronDown
-            className={`text-white transition ${
+            className={`text-slate-100 transition ${
               showMobileMenu ? 'rotate-180' : 'rotate-0'
             }`}
           />
           <MobileMenu visible={showMobileMenu} />
         </div>
         <div className='flex flex-row ml-auto gap-7 items-center '>
-          <div className='text-gray-200 hover:text-gray-300 cursor-pointer transition'>
+          <div className='text-slate-200 hover:text-slate-300 cursor-pointer transition'>
             <BsSearch />
           </div>
-          <div className='text-gray-200 hover:text-gray-300 cursor-pointer transition'>
+          <div className='text-slate-200 hover:text-slate-300 cursor-pointer transition'>
             <BsBell />
           </div>
           <div
@@ -125,12 +125,12 @@ const Navbar = () => {
               '
             >
               <img
-                src='/images/default-blue.png'
-                alt='user avatar'
+                src='/images/crazy-toad.gif'
+                alt='User avatar'
               />
             </div>
             <BsChevronDown
-              className={`text-white transition ${
+              className={`text-slate-100 transition ${
                 showAccountMenu ? 'rotate-180' : 'rotate-0'
               }`}
             />

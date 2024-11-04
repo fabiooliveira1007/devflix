@@ -46,17 +46,17 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId }) => {
         group/item 
         w-6 lg:w-10
         h-6 lg:h-10 
-        border-white border-2 
+        border-slate-100 border-2 
         rounded-full 
         flex 
         justify-center 
         items-center 
         transition
-        hover:border-neutral-300
+        hover:border-slate-300
       '
     >
       <Icon
-        className='text-white'
+        className='text-slate-100'
         size={16}
       />
     </div>

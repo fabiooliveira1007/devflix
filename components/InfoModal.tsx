@@ -35,7 +35,7 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
         z-50
         transition
         duration-300
-        bg-black
+        bg-slate-950
         bg-opacity-80
         flex
         justify-center
@@ -44,16 +44,15 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
         overflow-y-auto
         fixed
         inset-0
-
       '
     >
       <div
         className='
           relative
-          w-auto
-          mx-auto
+          mx-6
+          max-h-[85%]
           max-w-3xl
-          overflow-hidden
+        overflow-y-auto
         '
       >
         <div
@@ -63,11 +62,11 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
             duration-200
             relative
             flex-auto
-            bg-zinc-900
+            bg-slate-800
             drop-shadow-md
           `}
         >
-          <div className='relative h-96'>
+          <div className='relative h-[40vh]'>
             <video
               className='
                 w-full
@@ -90,7 +89,7 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
                 h-10
                 w-10
                 rounded-full
-                bg-black
+                bg-slate-950
                 bg-opacity-70
                 flex
                 items-center
@@ -100,14 +99,14 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
               onKeyDown={handleClose}
             >
               <AiOutlineClose
-                className='text-white'
+                className='text-slate-100'
                 size={20}
               />
             </div>
             <div className='absolute bottom-[10%] left-10'>
               <p
                 className='
-                  text-white
+                  text-slate-100
                   text-3xl md:text-4xl lg:text-5xl
                   h-full
                   font-bold
@@ -123,11 +122,11 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
             </div>
           </div>
           <div className='px-12 py-8'>
-            <p className='text-green-400 font-semibold text-2xl pb-2'>New</p>
-            <p className='text-white text-lg font-semibold'>{data?.duration}</p>
-            <p className='text-white text-lg font-semibold'>{data?.genre}</p>
+            <p className='text-green-400 font-semibold md:text-2xl pb-2'>New</p>
+            <p className='text-slate-100 md:text-lg font-semibold'>{data?.duration}</p>
+            <p className='text-slate-100 md:text-lg font-semibold'>{data?.genre}</p>
             <hr className='my-2 bg-slate-600' />
-            <p className='text-white text-lg'>{data?.description}</p>
+            <p className='text-slate-100 md:text-lg'>{data?.description}</p>
           </div>
         </div>
       </div>
