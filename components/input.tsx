@@ -1,22 +1,27 @@
-import type { ReactEventHandler } from 'react';
+import type { HTMLInputTypeAttribute } from 'react';
 
 interface InputProps {
   id: string;
-  onChange: ReactEventHandler;
-  value: string;
   label: string;
-  type?: string;
+  type?: HTMLInputTypeAttribute;
+  error?: string;
+  register: React.HTMLProps<HTMLInputElement>;
 }
 
-const Input: React.FC<InputProps> = ({ id, onChange, value, label, type }) => {
+const Input: React.FC<InputProps> = ({
+  id,
+  label,
+  error,
+  register,
+  type = 'text',
+}) => {
   return (
     <div className='relative'>
       <input
-        onChange={onChange}
+        {...register}
         type={type}
-        value={value}
         id={id}
-        className='
+        className={`
           block 
           rounded-md 
           px-6 
@@ -29,7 +34,8 @@ const Input: React.FC<InputProps> = ({ id, onChange, value, label, type }) => {
           appearance-none 
           focus:outline-none 
           focus:ring-0 peer
-        '
+          ${error ? 'border-red-500 border-2' : 'border-slate-800'}
+        `}
         placeholder=' '
       />
       <label
@@ -54,6 +60,7 @@ const Input: React.FC<InputProps> = ({ id, onChange, value, label, type }) => {
       >
         {label}
       </label>
+      {error && <p className='text-red-500 text-sm mt-1'>{error}</p>}
     </div>
   );
 };

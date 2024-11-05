@@ -5,12 +5,15 @@ import { useCallback, useState } from 'react';
 import axios from 'axios';
 import { FcGoogle } from 'react-icons/fc';
 import { FaGithub } from 'react-icons/fa';
+import { baseSchema } from '@/lib/formSchema';
+import type { z } from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+type LoginSchema = z.infer<typeof baseSchema>;
 
 const Auth = () => {
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
-  const [variant, setVariant] = useState('login');
+  const [variant, setVariant] = useState<'login' | 'register'>('login');
 
   const toggleVariant = useCallback(() => {
     setVariant(currentVariant =>
@@ -18,31 +21,42 @@ const Auth = () => {
     );
   }, []);
 
-  const login = useCallback(async () => {
-    try {
-      await signIn('credentials', {
-        email,
-        password,
-        callbackUrl: '/profiles',
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  }, [email, password]);
+  // Compose react-hook-form + zod
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setError,
+  } = useForm<LoginSchema>({ resolver: zodResolver(baseSchema) });
 
-  const register = useCallback(async () => {
-    try {
-      await axios.post('/api/register', {
-        email,
-        name,
-        password,
-      });
-
-      login();
-    } catch (error) {
-      console.log(error);
+  const onSubmit = async (data: LoginSchema) => {
+    if (variant === 'register' && !data.name) {
+      setError('name', { type: 'manual', message: 'You must enter a name' });
+      return;
     }
-  }, [email, name, password, login]);
+
+    if (variant === 'login') {
+      try {
+        await signIn('credentials', {
+          email: data.email,
+          password: data.password,
+          callbackUrl: '/profiles',
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      try {
+        await axios.post('/api/register', {
+          email: data.email,
+          name: data.name,
+          password: data.password,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
 
   return (
     <div
@@ -84,42 +98,34 @@ const Auth = () => {
             <h2 className='text-slate-100 text-3xl mb-8'>
               {variant === 'login' ? 'Sign In' : 'Register'}
             </h2>
-            <div className='flex flex-col gap-4'>
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className='flex flex-col gap-4'
+            >
               {variant === 'register' && (
                 <Input
+                  id='username'
                   label='Username'
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                    setName(event.target.value)
-                  }
-                  id='name'
-                  type='name'
-                  value={name}
+                  error={errors.name?.message}
+                  register={register('name')}
                 />
               )}
               <Input
-              
-                label='Email'
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                  setEmail(event.target.value)
-                }
                 id='email'
-                type='email'
-                value={email}
+                label='Email'
+                error={errors.email?.message}
+                register={register('email')}
               />
               <Input
-                label='Password'
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                  setPassword(event.target.value)
-                }
                 id='password'
-                type='password'
-                value={password}
+                label='Password'
+                error={errors.password?.message}
+                register={register('password')}
               />
-            </div>
-            <button
-              onClick={variant === 'login' ? login : register}
-              type='button'
-              className='
+
+              <button
+                type='submit'
+                className='
                 bg-slate-600 
                 text-slate-100
                 py-3 
@@ -129,9 +135,10 @@ const Auth = () => {
                 hover:bg-slate-700 
                 transition
               '
-            >
-              {variant === 'login' ? 'Login' : 'Sign Up'}
-            </button>
+              >
+                {variant === 'login' ? 'Login' : 'Sign Up'}
+              </button>
+            </form>
             <div
               className='
                 flex 
