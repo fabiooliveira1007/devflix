@@ -2,18 +2,20 @@ import Input from '@/components/input';
 import Image from 'next/image';
 import { signIn } from 'next-auth/react';
 import { useCallback, useState } from 'react';
-import axios from 'axios';
+import axios, { type AxiosError } from 'axios';
 import { FcGoogle } from 'react-icons/fc';
 import { FaGithub } from 'react-icons/fa';
 import { baseSchema } from '@/lib/formSchema';
 import type { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/router';
 
 type LoginSchema = z.infer<typeof baseSchema>;
 
 const Auth = () => {
   const [variant, setVariant] = useState<'login' | 'register'>('login');
+  const router = useRouter();
 
   const toggleVariant = useCallback(() => {
     setVariant(currentVariant =>
@@ -36,14 +38,28 @@ const Auth = () => {
     }
 
     if (variant === 'login') {
-      try {
-        await signIn('credentials', {
-          email: data.email,
-          password: data.password,
-          callbackUrl: '/profiles',
-        });
-      } catch (error) {
-        console.log(error);
+      const result = await signIn('credentials', {
+        email: data.email,
+        password: data.password,
+        redirect: false,
+      });
+
+      if (result?.error) {
+        if (result.error.includes('Email')) {
+          setError('email', {
+            type: 'manual',
+            message: 'Email does not exist',
+          });
+        }
+
+        if (result.error.includes('Password')) {
+          setError('password', {
+            type: 'manual',
+            message: 'Incorrect Password',
+          });
+        }
+      } else {
+        router.push('/profiles');
       }
     } else {
       try {
@@ -52,8 +68,16 @@ const Auth = () => {
           name: data.name,
           password: data.password,
         });
-      } catch (error) {
-        console.log(error);
+
+        router.push('/profiles');
+      } catch (error: unknown) {
+        if (axios.isAxiosError(error)) {
+          const errorMessage =
+            error.response?.data?.error || 'Registration Failed.';
+          if (errorMessage.includes('Email')) {
+            setError('email', { type: 'manual', message: errorMessage });
+          }
+        }
       }
     }
   };
@@ -106,6 +130,7 @@ const Auth = () => {
                 <Input
                   id='username'
                   label='Username'
+                  type='text'
                   error={errors.name?.message}
                   register={register('name')}
                 />
@@ -113,12 +138,14 @@ const Auth = () => {
               <Input
                 id='email'
                 label='Email'
+                type='email'
                 error={errors.email?.message}
                 register={register('email')}
               />
               <Input
                 id='password'
                 label='Password'
+                type='password'
                 error={errors.password?.message}
                 register={register('password')}
               />
