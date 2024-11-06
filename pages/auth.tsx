@@ -71,6 +71,12 @@ const Auth = () => {
           password: data.password,
         });
 
+        await signIn('credentials', {
+          email: data.email,
+          password: data.password,
+          redirect: false,
+        });
+
         router.push('/profiles');
       } catch (error: unknown) {
         if (axios.isAxiosError(error)) {
