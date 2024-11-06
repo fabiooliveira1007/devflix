@@ -17,19 +17,21 @@ const Auth = () => {
   const [variant, setVariant] = useState<'login' | 'register'>('login');
   const router = useRouter();
 
-  const toggleVariant = useCallback(() => {
-    setVariant(currentVariant =>
-      currentVariant === 'login' ? 'register' : 'login'
-    );
-  }, []);
-
   // Compose react-hook-form + zod
   const {
     register,
     handleSubmit,
     formState: { errors },
     setError,
+    reset,
   } = useForm<LoginSchema>({ resolver: zodResolver(baseSchema) });
+
+  const toggleVariant = useCallback(() => {
+    setVariant(currentVariant =>
+      currentVariant === 'login' ? 'register' : 'login'
+    );
+    reset();
+  }, [reset]);
 
   const onSubmit = async (data: LoginSchema) => {
     if (variant === 'register' && !data.name) {
